@@ -9,18 +9,22 @@ const MainCard = props => {
 
     const oddEven = props.index % 2 == 0 ? "red":"blue";
 
-    const url = "https://io.adafruit.com/speedlights/feeds/" + deviceID;
+    const feedname = deviceID == "abc_1"? "moist":"moistier";
+
+    const url = "https://io.adafruit.com/kevinroot/feeds/" + feedname;
 
     return (
       <Card style={{backgroundColor: oddEven}}>
-        <CardActionArea href= {url} target="_blank" >
           <Typography display="block">Plant Name: {plantName}</Typography>
           <Typography display="block">Device ID: {deviceID}</Typography>
           <Typography display="block">Times per Day to Water: {timesPerDay}</Typography>
-          <Typography display="block">TImees per Week to Water: {timesPerWeek}</Typography>
+          <Typography display="block">Times per Week to Water: {timesPerWeek}</Typography>
           <Typography display="block">Durination of Water: {durination}</Typography>
           <button onClick={props.onRemove}>Remove Card</button>
-        </CardActionArea>
+          <form action={url} target="_blank">
+            <button type="submit">View Chart</button>
+          </form>
+
       </Card>
     );
   };

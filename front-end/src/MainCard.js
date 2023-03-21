@@ -40,9 +40,7 @@ const MainCard = props => {
       return () => clearInterval(interval);
     }, []);
 
-    onEdit(){
-
-    };
+    
 
     return (
       <Card style={{backgroundColor: oddEven}}>
@@ -56,7 +54,6 @@ const MainCard = props => {
           <form action={url} target="_blank">
             <button type="submit">View Chart</button>
           </form>
-          <button onClick={this.onEdit}>Edit Values</button>
 
       </Card>
     );

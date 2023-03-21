@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
 import { CardActionArea, Typography } from "@mui/material";
 
+
 const MainCard = props => {
+
+
 
     const [plantName, deviceID, timesPerDay, timesPerWeek, durination, cardID] = props.number;
 
@@ -37,6 +40,10 @@ const MainCard = props => {
       return () => clearInterval(interval);
     }, []);
 
+    onEdit(){
+
+    };
+
     return (
       <Card style={{backgroundColor: oddEven}}>
           <Typography display="block">Plant Name: {plantName}</Typography>
@@ -49,7 +56,7 @@ const MainCard = props => {
           <form action={url} target="_blank">
             <button type="submit">View Chart</button>
           </form>
-          <button>Edit Values</button>
+          <button onClick={this.onEdit}>Edit Values</button>
 
       </Card>
     );

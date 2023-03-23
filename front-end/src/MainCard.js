@@ -82,7 +82,7 @@ const MainCard = props => {
     const oddEven = props.index % 2 === 0 ? "#ffcdd2":"#81d4fa";
     const NameColor = props.index %2 === 0? "#ef5350":"#2196f3"
 
-    const feedname = device_id === "abc_1"? "moist":"moistier";
+    const feedname = device_id === "abc_1"? "moisture":"moistier";
 
     const url = "https://io.adafruit.com/kevinroot/feeds/" + feedname;
 

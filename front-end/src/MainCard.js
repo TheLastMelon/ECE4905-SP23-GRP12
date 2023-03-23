@@ -182,8 +182,18 @@ const MainCard = props => {
           <Typography display="block">Per Day: {time_per_day}</Typography>
           <Typography display="block">Per Week: {time_per_week}</Typography>
           <Typography display="block">Duration: {durination} sec</Typography>
-          { mostureLevel !== -69 &&
-            <Typography display="block">Moisture Level: {mostureLevel} units</Typography>
+
+        
+
+          { 
+            /**
+             * This will hide the moisture level until it gets updated with a proper value.
+             * 
+             * We check agaist -69 which is the default value
+             */
+            mostureLevel !== -69 &&
+            
+            <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
           }         
           <Stack direction="row" spacing={2}>
             <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>

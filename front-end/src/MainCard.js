@@ -1,10 +1,9 @@
 
 import React, { useEffect, useState } from "react";
 import Card from '@mui/material/Card';
-import { CardActionArea, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import DefaultPlant from './images/article-cal-s.png';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,6 +12,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 
 const MainCard = props => {
+
+  const DEBUG = true;
 
   const [open, setOpen] = React.useState(false);
 
@@ -40,6 +41,10 @@ const MainCard = props => {
 
       let resJson = await res.json();
 
+      if(DEBUG){
+        console.log("The Result from editing the card with ID " + card_id + " is" + resJson);
+      }
+
     }catch(event){
       console.log(event)
     }
@@ -64,12 +69,12 @@ const MainCard = props => {
     const [time_per_day, setTPD] = useState(props.number[2]);
     const [time_per_week, setTPW] = useState(props.number[3]);
     const [durination, setDurination] = useState(props.number[4]);
-    const [card_id, setCardID] = useState(props.number[5]);
+    const card_id = props.number[5];
 
-    const oddEven = props.index % 2 == 0 ? "#ffcdd2":"#81d4fa";
-    const NameColor = props.index %2 == 0? "#ef5350":"#2196f3"
+    const oddEven = props.index % 2 === 0 ? "#ffcdd2":"#81d4fa";
+    const NameColor = props.index %2 === 0? "#ef5350":"#2196f3"
 
-    const feedname = device_id == "abc_1"? "moist":"moistier";
+    const feedname = device_id === "abc_1"? "moist":"moistier";
 
     const url = "https://io.adafruit.com/kevinroot/feeds/" + feedname;
 
@@ -79,11 +84,18 @@ const MainCard = props => {
 
     useEffect(() => {
       const interval = setInterval(() => {
+
+        if(DEBUG){
+          console.log("Going to fetch Moisture Level for Device ID: " + device_id);
+        }
+
         fetch(getDataUrl)
         .then((response) => response.text())
         .then((data) => {
-          console.log("Starting to Print Most Recent Data Point for " + device_id + ":");
-          console.log(data);
+
+          if(DEBUG){
+            console.log("Starting to Print Most Recent Data Point for " + device_id + ": " + data);
+          }
           setML(data.substring(0, data.indexOf(",")));
           
         })
@@ -95,7 +107,7 @@ const MainCard = props => {
       }, 60000);
 
       return () => clearInterval(interval);
-    }, []);
+    }, [DEBUG, device_id, getDataUrl]);
 
     return (
       <div>
@@ -135,6 +147,7 @@ const MainCard = props => {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(event) => setTPW(event.target.value)}
           />
           <TextField
             autoFocus
@@ -144,6 +157,7 @@ const MainCard = props => {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(event) => setTPD(event.target.value)}
           />
           <TextField
             autoFocus
@@ -153,6 +167,7 @@ const MainCard = props => {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(event) => setDurination(event.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -168,6 +183,7 @@ const MainCard = props => {
           <Typography display="block">Per Day: {time_per_day}</Typography>
           <Typography display="block">Per Week: {time_per_week}</Typography>
           <Typography display="block">Duration: {durination} sec</Typography>
+          <Typography display="block">Moisture Level: {mostureLevel} units</Typography>
           <Stack direction="row" spacing={2}>
             <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
             <form action={url} target="_blank">

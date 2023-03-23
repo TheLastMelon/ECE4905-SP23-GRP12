@@ -1,5 +1,4 @@
 import React from "react";
-import BasicCard from "./BasicCard";
  
 const Popup = props => {
   return (

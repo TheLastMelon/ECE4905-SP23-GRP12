@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SideBar from "./SideBar";
 import Header from "./Header";
 import "./StyleSheets/style.css";
-import { Card, Grid } from '@mui/material';
 import MainCard from "./MainCard";
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
 
     //console.log(value.Show)
 
-    if(value.Show == 0){
+    if(value.Show === 0){
 
       console.log("This Card Will be Shown")
       

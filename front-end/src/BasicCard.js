@@ -22,6 +22,8 @@ const BasicCard = props => {
 
     const handleSubmit = async (e) => {
 
+      const DEBUG = true;
+
       // IDK
       e.preventDefault();
 
@@ -42,6 +44,10 @@ const BasicCard = props => {
           }),
         });
         let resJson = await res.json();
+
+        if(DEBUG){
+          console.log("The Result from adding the card " + deviceID + "is" + resJson);
+        }
 
         if (res.status === 200) {
           setDeviceID("");

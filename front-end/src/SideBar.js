@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import BasicCard from "./BasicCard";
-import { CardMedia, Grid, Stack, Box } from "@mui/material";
-import Popup from "./Popup";
+import {  Grid, Box } from "@mui/material";
 
 const SideBar = props => {
 

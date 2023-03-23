@@ -4,8 +4,40 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Popups from './Popup';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+
+import Button from '@mui/material/Button';
+
+const feed_name = "soil-moisture";
+const user_name = "kevinroot";
+
+const feed_one = "moist";
+const feed_two = "moistier";
+
+// https://io.adafruit.com/speedlights/feeds/soil-moisture
+
 
 const BasicCard = props => {
+
+  const [open, setOpen] = React.useState(false);
+
+    //Opening the popup box
+    const handleClickOpen = () => {
+      setOpen(true);
+      
+    };
+  
+    //Closing the Popup Box
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
  
@@ -21,8 +53,6 @@ const BasicCard = props => {
     const [timePerWatering, setTimePerWatering] = useState('');
 
     const handleSubmit = async (e) => {
-
-      const DEBUG = true;
 
       // IDK
       e.preventDefault();
@@ -45,10 +75,6 @@ const BasicCard = props => {
         });
         let resJson = await res.json();
 
-        if(DEBUG){
-          console.log("The Result from adding the card " + deviceID + "is" + resJson);
-        }
-
         if (res.status === 200) {
           setDeviceID("");
           setName("");
@@ -64,19 +90,81 @@ const BasicCard = props => {
         console.log(err);
       }
 
-      togglePopup();
-      //props.addCard([name, deviceID, timesPerDay, timesPerWeek, timePerWatering]);
+      handleClose();
     }
   
     
   
   return (
     <div >
-        <Card onClick={togglePopup} sx={{ minWidth: 150, maxWidth: 150} }>
+        <Card onClick={handleClickOpen} sx={{ minWidth: 150, maxWidth: 150} }>
             <CardActionArea>
                 <Typography>{props.name}</Typography>
             </CardActionArea>
         </Card>
+        <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add A New Plant!</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+              Enter the new plants information here!
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="deviceID_edit"
+            label="Device ID"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(event) => setDeviceID(event.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="plantName"
+            label="Plant Name"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(event) => setName(event.target.value)}
+          />
+          <TextField
+            autoFocus
+            type="number"
+            margin="dense"
+            id="tpd_water"
+            label="Waterings Per Day"
+            fullWidth
+            variant="standard"
+            onChange={(event) => setTimesPerDay(event.target.value)}
+          />
+          <TextField
+            autoFocus
+            inputProps={{ min: 1, max: 7 }}
+            type="number"
+            margin="dense"
+            id="tpw_water"
+            label="Watering Per Week"
+            fullWidth
+            variant="standard"
+            onChange={(event) => setTimesPerWeek(event.target.value)}
+          />
+          <TextField
+            autoFocus
+            type="number"
+            margin="dense"
+            id="durination"
+            label="How long Per Watering"
+            fullWidth
+            variant="standard"
+            onChange={(event) => setTimePerWatering(event.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Submit this Data</Button>
+        </DialogActions>
+      </Dialog>
         {isPopupOpen && <Popups onClick={togglePopup} content={<>
           <form onSubmit={handleSubmit}>
             <label>

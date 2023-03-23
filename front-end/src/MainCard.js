@@ -189,7 +189,9 @@ const MainCard = props => {
       
       { /**
        * This Card is shown on the main webpage to display these values
-       */}
+       * Small Change
+       */
+       }
       <Card style={{backgroundColor: oddEven}}>
       
           <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>

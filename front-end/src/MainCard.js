@@ -17,12 +17,18 @@ const MainCard = props => {
 
   const [open, setOpen] = React.useState(false);
 
+  /**
+   * This fuction will update a entry in the MariaDB for the
+   * respective card
+   */
   const pushNewValue = async (e) => {
 
     e.preventDefault();
 
+
     try{
 
+      // Creating the POST request with the proper data
       let res = await fetch("https://h2bros.ddns.net/edit_card",{
         method: "POST",
         headers: {
@@ -52,11 +58,13 @@ const MainCard = props => {
     setOpen(false);
   };
 
+  //Opening the popup box
   const handleClickOpen = () => {
     setOpen(true);
     
   };
 
+  //Closing the Popup Box
   const handleClose = () => {
     setOpen(false);
   };
@@ -110,6 +118,10 @@ const MainCard = props => {
 
     return (
       <div>
+        {/** 
+         * This is a popup box to change the current values of the
+         * schedule
+         */}
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
@@ -174,7 +186,10 @@ const MainCard = props => {
           <Button onClick={pushNewValue}>Submit Changes</Button>
         </DialogActions>
       </Dialog>
-
+      
+      { /**
+       * This Card is shown on the main webpage to display these values
+       */}
       <Card style={{backgroundColor: oddEven}}>
       
           <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>

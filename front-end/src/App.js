@@ -6,6 +6,7 @@ import MainCard from "./MainCard";
 
 function App() {
 
+  const DEBUG = true;
   
 
   const [sidebarOpen, setSideBarOpen] = useState(false);
@@ -35,7 +36,7 @@ function App() {
         Formating
         [name, deviceID, timesPerDay, timesPerWeek, timePerWatering]
       */
-      const singleCard = [value.PlantName, value.DeviceID, value.TimesPerDay, value.TimesPerWeek, value.Duration]
+      //const singleCard = [value.PlantName, value.DeviceID, value.TimesPerDay, value.TimesPerWeek, value.Duration]
 
       const newCard = [...cards, ["s", "s"]];
 
@@ -47,13 +48,6 @@ function App() {
       console.log("This Card Will Not be Shown");
     }
 
-  }
-
-  const temp = () => {
-
-    if(sidebarOpen){
-      return {marginRight: "80px"}
-    }
   }
 
   /**
@@ -107,6 +101,10 @@ function App() {
           ID: cardID,
         }),
       });
+
+      if(DEBUG){
+        console.log("Removing the card with ID: " + cardID + " has a response of " + res);
+      }
     }catch{
       console.log("Error has occured while remove the card");
     }

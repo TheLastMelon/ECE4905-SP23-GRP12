@@ -63,7 +63,7 @@ const MainCard = props => {
 
     //const [plantName, deviceID, timesPerDay, timesPerWeek, durination, cardID] = props.number;
 
-    const [mostureLevel, setML] = useState([]);
+    const [mostureLevel, setML] = useState(-69);
     const [plant_name, setPlantName] = useState(props.number[0]);
     const [device_id, setDeviceID] = useState(props.number[1]);
     const [time_per_day, setTPD] = useState(props.number[2]);
@@ -81,7 +81,6 @@ const MainCard = props => {
     const getDataUrl = "https://io.adafruit.com/api/v2/kevinroot/feeds/" + feedname + "/data/retain"
 
 
-
     useEffect(() => {
       const interval = setInterval(() => {
 
@@ -89,20 +88,20 @@ const MainCard = props => {
           console.log("Going to fetch Moisture Level for Device ID: " + device_id);
         }
 
-        fetch(getDataUrl)
-        .then((response) => response.text())
-        .then((data) => {
+        
+      fetch(getDataUrl)
+      .then((response) => response.text())
+      .then((data) => {
 
-          if(DEBUG){
-            console.log("Starting to Print Most Recent Data Point for " + device_id + ": " + data);
-          }
-          setML(data.substring(0, data.indexOf(",")));
-          
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
+        if(DEBUG){
+          console.log("Starting to Print Most Recent Data Point for " + device_id + ": " + data);
+        }
+        setML(data.substring(0, data.indexOf(",")));
+        
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
       }, 60000);
 
@@ -183,7 +182,9 @@ const MainCard = props => {
           <Typography display="block">Per Day: {time_per_day}</Typography>
           <Typography display="block">Per Week: {time_per_week}</Typography>
           <Typography display="block">Duration: {durination} sec</Typography>
-          <Typography display="block">Moisture Level: {mostureLevel} units</Typography>
+          { mostureLevel !== -69 &&
+            <Typography display="block">Moisture Level: {mostureLevel} units</Typography>
+          }         
           <Stack direction="row" spacing={2}>
             <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
             <form action={url} target="_blank">

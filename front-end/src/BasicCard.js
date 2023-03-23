@@ -3,6 +3,7 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Popups from './Popup';
+import Button from '@mui/material/Button';
 
 
 const BasicCard = props => {
@@ -104,7 +105,7 @@ const BasicCard = props => {
               <input type="number" min="5" max="60" onChange = {(e) => setTimePerWatering(e.target.value)} value={timePerWatering}></input>
             </label>
             <br></br>
-            <button type="submit">Submit Data!</button>
+            <Button type="submit">Submit Data!</Button>
             
           </form>
       </>}

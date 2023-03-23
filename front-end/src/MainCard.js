@@ -117,82 +117,9 @@ const MainCard = props => {
     }, [DEBUG, device_id, getDataUrl]);
 
     return (
-      <div>
-        {/** 
-         * This is a popup box to change the current values of the
-         * schedule
-         */}
-        <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            If you want to change any of the values, just do it here!
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="deviceID_edit"
-            label="Device ID"
-            value={device_id}
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(event) => setDeviceID(event.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="plant_name_edit"
-            label="Plant Name"
-            value={plant_name}
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(event) => setPlantName(event.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="timesPerWeek_edit"
-            value={time_per_week}
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(event) => setTPW(event.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="timesPerDay_edit"
-            value={time_per_day}
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(event) => setTPD(event.target.value)}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="durination_edit"
-            value={durination}
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(event) => setDurination(event.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={pushNewValue}>Submit Changes</Button>
-        </DialogActions>
-      </Dialog>
-      
-      { /**
-       * This Card is shown on the main webpage to display these values
-       */}
       <Card style={{backgroundColor: oddEven}}>
       
-          <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
+          <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plantName}</Typography>
           <Typography display="block" align="left" variant="h5">Water Scheduling: </Typography>
           <Typography display="block">Per Day: {time_per_day}</Typography>
           <Typography display="block">Per Week: {time_per_week}</Typography>
@@ -217,9 +144,8 @@ const MainCard = props => {
             </form>
             <Button variant="contained" style={{backgroundColor: NameColor}} onClick={handleClickOpen}>Edit Card</Button>
           </Stack>
-          <Typography display="block" align="right">Device ID: {device_id}</Typography>
+          <Typography display="block" align="right">Device ID: {deviceID}</Typography>
       </Card>
-      </div>
     );
   };
   

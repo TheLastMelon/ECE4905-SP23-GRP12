@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 const feed_name = "soil-moisture";
 const user_name = "kevinroot";
 
-const feed_one = "moist";
+const feed_one = "moisture";
 const feed_two = "moistier";
 
 // https://io.adafruit.com/speedlights/feeds/soil-moisture

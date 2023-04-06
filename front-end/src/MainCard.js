@@ -10,7 +10,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-
+import CardMedia, { cardMediaClasses } from '@mui/material/CardMedia';
+import SamplePlant from './images/article-cal-s.png'
+import { ClassNames } from "@emotion/react";
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 const MainCard = props => {
 
   const DEBUG = true;
@@ -192,35 +204,40 @@ const MainCard = props => {
        * Small Change
        */
        }
-      <Card style={{backgroundColor: oddEven}}>
-      
-          <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
-          <Typography display="block" align="left" variant="h5">Water Scheduling: </Typography>
-          <Typography display="block">Per Day: {time_per_day}</Typography>
-          <Typography display="block">Per Week: {time_per_week}</Typography>
-          <Typography display="block">Duration: {durination} sec</Typography>
+      <Grid container spacing={0}>
+       <Grid item xs={14}>
+          <Item elevation={0}>
+            <Card style={{backgroundColor: oddEven}}>
+                <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
+                <Typography display="block" align="center" variant="h5">Water Scheduling: </Typography>
+                <Typography display="block">Per Day: {time_per_day}</Typography>
+                <Typography display="block">Per Week: {time_per_week}</Typography>
+                <Typography display="block">Duration: {durination} sec</Typography>
 
-        
+              
 
-          { 
-            /**
-             * This will hide the moisture level until it gets updated with a proper value.
-             * 
-             * We check agaist -69 which is the default value
-             */
-            mostureLevel !== -69 &&
-            
-            <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
-          }         
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
-            <form action={url} target="_blank">
-              <Button variant="contained" style={{backgroundColor: NameColor}} type="submit">View Chart</Button>
-            </form>
-            <Button variant="contained" style={{backgroundColor: NameColor}} onClick={handleClickOpen}>Edit Card</Button>
-          </Stack>
-          <Typography display="block" align="right">Device ID: {device_id}</Typography>
-      </Card>
+                { 
+                  /**
+                  * This will hide the moisture level until it gets updated with a proper value.
+                  * 
+                  * We check agaist -69 which is the default value
+                  */
+                  mostureLevel !== -69 &&
+                  
+                  <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
+                }         
+                <Stack direction="row" justifyContent="space-evenly" alignItems="flex-end" spacing={0}>
+                  <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
+                  <form action={url} target="_blank">
+                    <Button variant="contained" style={{backgroundColor: NameColor}} type="submit">View Chart</Button>
+                  </form>
+                  <Button variant="contained" style={{backgroundColor: NameColor}} onClick={handleClickOpen}>Edit Card</Button>
+                </Stack>
+                <Typography display="block" align="right">Device ID: {device_id}</Typography>
+            </Card>
+          </Item>
+        </Grid>
+      </Grid>
       </div>
     );
   };

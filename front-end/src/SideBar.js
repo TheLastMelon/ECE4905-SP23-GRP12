@@ -2,6 +2,7 @@ import React from "react";
 import BasicCard from "./BasicCard";
 import { CardMedia, Grid, Stack, Box } from "@mui/material";
 import Popup from "./Popup";
+import Button from '@mui/material/Button';
 
 const SideBar = props => {
 
@@ -18,7 +19,7 @@ const SideBar = props => {
         </Grid>
         }
         <div>
-          <Button variant="contained" onClick={props.onClick} >Close Me!</Button>
+          <Button variant="contained" style={{backgroundColor: "#f27573"}} onClick={props.onClick} >Close Me!</Button>
         </div>        
       </div>
     );

@@ -189,7 +189,7 @@ const BasicCard = props => {
             </label>
             <br></br>
             <label>
-              Watering Durination (Seconds):
+              Watering Duration (Seconds):
               <input type="number" min="5" max="60" onChange = {(e) => setTimePerWatering(e.target.value)} value={timePerWatering}></input>
             </label>
             <br></br>

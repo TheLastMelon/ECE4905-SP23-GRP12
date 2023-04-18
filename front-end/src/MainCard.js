@@ -197,49 +197,59 @@ const MainCard = props => {
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={pushNewValue}>Submit Changes</Button>
         </DialogActions>
-      </Dialog>
+        </Dialog>
       
-      { /**
-       * This Card is shown on the main webpage to display these values
-       * Small Change
-       */
-       }
-      <Grid container spacing={0}>
-       <Grid item xs={14}>
-          <Item elevation={0}>
-            <Card style={{backgroundColor: oddEven}}>
-                <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
-                <Typography display="block" align="center" variant="h5">Water Scheduling: </Typography>
-                <Typography display="block">Per Day: {time_per_day}</Typography>
-                <Typography display="block">Per Week: {time_per_week}</Typography>
-                <Typography display="block">Duration: {durination} sec</Typography>
+        { /**
+        * This Card is shown on the main webpage to display these values
+        * Small Change
+        */
+        }
+        <Grid container spacing={0}>
+        <Grid item xs={14}>
+            <Item elevation={0}>
+              <Item elevation={3} style={{padding: '1', backgroundColor: oddEven}}>              
+                <Card elevation={0} style={{backgroundColor: oddEven}}>
+                  <Grid container spacing={2} columns={12}>
+                    <Grid item xs={4}> 
+                      <Typography display="left" JustifyContent="flex-end">Device ID: {device_id}</Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
+                      <Typography display="block" align="center" variant="h5">Water Scheduling: </Typography>
+                      <Typography display="block">Per Day: {time_per_day}</Typography>
+                      <Typography display="block">Per Week: {time_per_week}</Typography>
+                      <Typography display="block">Duration: {durination} sec</Typography>
 
-              
+                    
 
-                { 
-                  /**
-                  * This will hide the moisture level until it gets updated with a proper value.
-                  * 
-                  * We check agaist -69 which is the default value
-                  */
-                  mostureLevel !== -69 &&
-                  
-                  <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
-                }         
-                <Stack direction="row" justifyContent="space-evenly" alignItems="flex-end" spacing={0}>
-                  <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
-                  <form action={url} target="_blank">
-                    <Button variant="contained" style={{backgroundColor: NameColor}} type="submit">View Chart</Button>
-                  </form>
-                  <Button variant="contained" style={{backgroundColor: NameColor}} onClick={handleClickOpen}>Edit Card</Button>
-                </Stack>
-                <Typography display="block" align="right">Device ID: {device_id}</Typography>
-            </Card>
-          </Item>
+                      { 
+                        /**
+                        * This will hide the moisture level until it gets updated with a proper value.
+                        * 
+                        * We check agaist -69 which is the default value
+                        */
+                        mostureLevel !== -69 &&
+                        
+                        <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
+                      }
+                    </Grid> 
+                      <Grid item xs={4}> 
+                          <Stack direction="column" justifyContent="space-evenly" alignItems="flex-end" spacing={3}>
+                            <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
+                            <form action={url} target="_blank">
+                              <Button variant="contained" style={{backgroundColor: NameColor}} type="submit">View Chart</Button>
+                            </form>
+                            <Button variant="contained" style={{backgroundColor: NameColor}} onClick={handleClickOpen}>Edit Card</Button>
+                          </Stack>
+                      </Grid>  
+                  </Grid> 
+                </Card>
+              </Item>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
       </div>
-    );
+   );
   };
   
   export default MainCard;

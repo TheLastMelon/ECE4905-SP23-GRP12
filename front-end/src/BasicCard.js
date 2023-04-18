@@ -12,7 +12,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 
-import Button from '@mui/material/Button';
 
 const feed_name = "soil-moisture";
 const user_name = "kevinroot";

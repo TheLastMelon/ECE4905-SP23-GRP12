@@ -84,6 +84,7 @@ const MainCard = props => {
     //const [plantName, deviceID, timesPerDay, timesPerWeek, durination, cardID] = props.number;
 
     const [mostureLevel, setML] = useState(-69);
+    const [lastWatered, setLastWatered] = useState(-69);
     const [plant_name, setPlantName] = useState(props.number[0]);
     const [device_id, setDeviceID] = useState(props.number[1]);
     const [time_per_day, setTPD] = useState(props.number[2]);
@@ -99,8 +100,11 @@ const MainCard = props => {
     const url = "https://io.adafruit.com/kevinroot/feeds/" + feedname;
 
     const getDataUrl = "https://io.adafruit.com/api/v2/kevinroot/feeds/" + feedname + "/data/retain"
+    
 
-
+    /**
+     * This is the process to get the moisture level from the place
+     */
     useEffect(() => {
       const interval = setInterval(() => {
 
@@ -127,6 +131,47 @@ const MainCard = props => {
 
       return () => clearInterval(interval);
     }, [DEBUG, device_id, getDataUrl]);
+
+    /**
+     * This is the process to add the last watered feature
+     */
+    useEffect(() => {
+      const interval = setInterval(() => {
+
+        if(DEBUG){
+          console.log("Going to Fetch Last Watered for device: " + device_id);
+        }
+
+        fetch("https://h2bros.ddns.net/get_lw",{
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          device_id: device_id
+        })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data[0].Date);
+
+          const curr_date = data[0].Date.substring(0, data[0].Date.indexOf('T'));
+          const curr_time = data[0].Date.substring(data[0].Date.indexOf("T") + 1, data[0].Date.indexOf("."));
+          setLastWatered(curr_date + " @ " + curr_time);
+
+
+
+
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+
+      }, 30000)
+
+      return () => clearInterval(interval);
+    });
 
     return (
       <div>
@@ -224,8 +269,13 @@ const MainCard = props => {
                   */
                   mostureLevel !== -69 &&
                   
-                  <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
-                }         
+                  <Typography display="block">Moisture Level: {mostureLevel}%</Typography>
+                }     
+                {
+                  lastWatered !== -69 &&
+
+                  <Typography display="block">Plant Last Watered: {lastWatered}</Typography>
+                }    
                 <Stack direction="row" justifyContent="space-evenly" alignItems="flex-end" spacing={0}>
                   <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
                   <form action={url} target="_blank">

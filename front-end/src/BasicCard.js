@@ -12,8 +12,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 
-import Button from '@mui/material/Button';
-
 const feed_name = "soil-moisture";
 const user_name = "kevinroot";
 
@@ -166,38 +164,6 @@ const BasicCard = props => {
           <Button onClick={handleSubmit}>Submit this Data</Button>
         </DialogActions>
       </Dialog>
-        {isPopupOpen && <Popups onClick={togglePopup} content={<>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Plant Name:
-              <input type="text" onChange = {(e) => setName(e.target.value)} value={name}></input>
-            </label>
-            <br></br>
-            <label>
-              Device ID:
-              <input type="text" onChange = {(e) => setDeviceID(e.target.value)} value={deviceID}></input>
-            </label>
-            <br></br>
-            <label>
-              Water How Many Time Per Day:
-              <input type="number" min="1" max="6" onChange = {(e) => setTimesPerDay(e.target.value)} value={timesPerDay}></input>
-            </label>
-            <br></br>
-            <label>
-              How Many Days Per Week:
-              <input type="number" min="1" max="7" onChange = {(e) => setTimesPerWeek(e.target.value)} value={timesPerWeek}></input>
-            </label>
-            <br></br>
-            <label>
-              Watering Duration (Seconds):
-              <input type="number" min="5" max="60" onChange = {(e) => setTimePerWatering(e.target.value)} value={timePerWatering}></input>
-            </label>
-            <br></br>
-            <Button type="submit">Submit Data!</Button>
-            
-          </form>
-      </>}
-    />}
     </div>
   );
 }

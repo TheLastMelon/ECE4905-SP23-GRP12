@@ -154,14 +154,14 @@ const MainCard = props => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data[0].Date);
+
+          var theDate = new Date(Date.parse(data[0].Date))
+          theDate.toLocaleString()
+          console.log(theDate);
 
           const curr_date = data[0].Date.substring(0, data[0].Date.indexOf('T'));
           const curr_time = data[0].Date.substring(data[0].Date.indexOf("T") + 1, data[0].Date.indexOf("."));
-          setLastWatered(curr_date + " @ " + curr_time);
-
-
-
+          setLastWatered(theDate.toString().substring(0, theDate.toString().indexOf('G')));
 
         })
         .catch((err) => {

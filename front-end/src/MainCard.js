@@ -211,30 +211,33 @@ const MainCard = props => {
                 <Card elevation={0} style={{backgroundColor: oddEven}}>
                   <Grid container spacing={2} columns={12}>
                     <Grid item xs={4}> 
-                      <Typography display="left" JustifyContent="flex-end">Device ID: {device_id}</Typography>
+                      <Stack direction="column" justifyContent="space-evenly" alignItems="left" spacing={1}> 
+                        <Typography display="block" align="left" variant="h3" style={{color: oddEven}}>{plant_name}</Typography>
+                        <Typography display="block" align="left" variant="h5">Water Scheduling: </Typography>
+                        <Typography display="block" align="left">Per Day: {time_per_day}</Typography>
+                        <Typography display="block" align="left">Per Week: {time_per_week}</Typography>
+                        <Typography display="block" align="left">Duration: {durination} sec </Typography>
+                      
+                      
+                        { 
+                          /**
+                          * This will hide the moisture level until it gets updated with a proper value.
+                          * 
+                          * We check agaist -69 which is the default value
+                          */
+                          mostureLevel !== -69 &&
+                          
+                          <Typography display="block" align="left">Moisture Level: {mostureLevel} %</Typography>
+                        }
+                        <Typography display="block" align="left">Device ID: {device_id}</Typography>
+                      </Stack>
                     </Grid>
                     <Grid item xs={4}>
                       <Typography display="block" align="center" variant="h3" style={{color: NameColor}}>{plant_name}</Typography>
-                      <Typography display="block" align="center" variant="h5">Water Scheduling: </Typography>
-                      <Typography display="block">Per Day: {time_per_day}</Typography>
-                      <Typography display="block">Per Week: {time_per_week}</Typography>
-                      <Typography display="block">Duration: {durination} sec</Typography>
-
-                    
-
-                      { 
-                        /**
-                        * This will hide the moisture level until it gets updated with a proper value.
-                        * 
-                        * We check agaist -69 which is the default value
-                        */
-                        mostureLevel !== -69 &&
-                        
-                        <Typography display="block">Moisture Level: {mostureLevel} Units</Typography>
-                      }
                     </Grid> 
                       <Grid item xs={4}> 
-                          <Stack direction="column" justifyContent="space-evenly" alignItems="flex-end" spacing={3}>
+                          <Typography display="block" align="left" variant="h3" style={{color: oddEven}}>{plant_name}</Typography>
+                          <Stack direction="column" justifyContent="space-evenly" alignItems="flex-end" spacing={5}>
                             <Button variant="contained" style={{backgroundColor: NameColor}} onClick={props.onRemove}>Remove Card</Button>
                             <form action={url} target="_blank">
                               <Button variant="contained" style={{backgroundColor: NameColor}} type="submit">View Chart</Button>
